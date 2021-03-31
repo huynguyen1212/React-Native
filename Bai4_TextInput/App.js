@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, Keyboard } from 'react-native';
 
 export default function App() {
@@ -7,6 +7,23 @@ export default function App() {
   const [passWord, setpassWord] = useState("")
   const [typedDescription, settypedDescription] = useState("")
 
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", () => {
+      settypedText("Kerboard is Show")
+    })
+    Keyboard.addListener("keyboardDidHide", () => {
+      settypedText("Kerboard is Hide")
+    })
+
+    return () => {
+      Keyboard.removeListener("keyboardDidShow", () => {
+        settypedText("Kerboard is Show")
+      });
+      Keyboard.removeListener("keyboardDidHide", () => {
+        settypedText("Kerboard is Hide")
+      });
+    };
+  }, [])
 
   return (
     <View style={styles.container}>
