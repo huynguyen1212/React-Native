@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Keyboard } from 'react-native';
 
 export default function App() {
   const [typedText, settypedText] = useState("hello")
   const [passWord, setpassWord] = useState("")
+  const [typedDescription, settypedDescription] = useState("")
+
 
   return (
     <View style={styles.container}>
@@ -33,11 +35,33 @@ export default function App() {
           borderColor: "red",
           borderWidth: 1
         }}
+        autoFocus={true} // nhảy vào ô này khi vào trang
         keyboardType="default"
         placeholder="Enter your password"
         secureTextEntry={true}
         onChangeText={(text) => {
           setpassWord(text);
+        }}
+      />
+
+      <TextInput
+        style={{
+          height: 100,
+          margin: 20,
+          padding: 10,
+          borderColor: "gray",
+          borderWidth: 1
+        }}
+        multiline={true} // gọi đc nhiều dòng
+        borderBottomColor="green"
+        borderBottomWidth={3}
+        borderLeftColor="green"
+        borderLeftWidth={3}
+        editable={true} // true là sửa đc
+        returnKeyType="google"
+        onSubmitEditing={Keyboard.dismiss} // xong là tụt xuống
+        onChangeText={(text) => {
+          settypedDescription(text);
         }}
       />
     </View>
