@@ -1,9 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import flatListData from "../data/flatListData"
+import AddModal from './AddModal';
 import FlatListItem from './FlatListItem';
 
 export default function BasicFlatList() {
+  const [deleteRowKey, setdeleteRowKey] = useState(null)
+  refreshFlatList = () => {
+    setdeleteRowKey(activeKey)
+    refs.flatList.scrollToEnd();
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -18,6 +25,10 @@ export default function BasicFlatList() {
       </FlatList>
 
       <Text>hi</Text>
+
+      <AddModal ref={"myModal"} parentFlatList={refreshFlatList}>
+
+      </AddModal>
     </View>
   );
 }
